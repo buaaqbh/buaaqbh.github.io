@@ -519,29 +519,40 @@ git remote set-url origin ssh://git@yinman:2224/bqin/ysbr2.git
             <p>参考：<a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04" title="参考" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04</a></p>
 <ol>
 <li><p>apache2:</p>
-<p> sudo apt-get install apache2</p>
-</li>
+<pre><code>sudo apt-get install apache2
+</code></pre></li>
 <li><p>Install MySQL</p>
-<p> sudo apt-get install mysql-server</p>
-</li>
+<pre><code>sudo apt-get install mysql-server
+</code></pre></li>
 <li><p>Install PHP</p>
-<p> sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql<br> sudo systemctl restart apache2</p>
-</li>
+<pre><code>sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql  
+sudo systemctl restart apache2
+</code></pre></li>
 <li><p>Installing Webmin</p>
-<p> sudo nano /etc/apt/sources.list<br> Then add this line to the bottom of the file to add the new repository:<br> deb <a href="http://download.webmin.com/download/repository" target="_blank" rel="external">http://download.webmin.com/download/repository</a> sarge contrib  </p>
-<p> wget <a href="http://www.webmin.com/jcameron-key.asc" target="_blank" rel="external">http://www.webmin.com/jcameron-key.asc</a><br> sudo apt-key add jcameron-key.asc<br> sudo apt-get update<br> sudo apt-get install webmin  </p>
-</li>
+<pre><code>sudo nano /etc/apt/sources.list  
+Then add this line to the bottom of the file to add the new repository:  
+deb http://download.webmin.com/download/repository sarge contrib  
+
+wget http://www.webmin.com/jcameron-key.asc  
+sudo apt-key add jcameron-key.asc  
+sudo apt-get update  
+sudo apt-get install webmin  
+</code></pre></li>
 <li><p>jre</p>
-<p> sudo apt install default-jre</p>
-</li>
+<pre><code>sudo apt install default-jre
+</code></pre></li>
 <li><p>32bit</p>
-<p> sudo dpkg –add-architecture i386<br> sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386</p>
-</li>
+<pre><code>sudo dpkg --add-architecture i386  
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+</code></pre></li>
 <li><p>ctags</p>
-<p> sudo apt-get install ctags<br> sudo apt install cscope  </p>
-</li>
+<pre><code>sudo apt-get install ctags  
+sudo apt install cscope  
+</code></pre></li>
 <li><p>samba</p>
-<p> sudo apt-get install samba<br> vim /etc/samba/smb.conf<br> 把已有的账户添加到samba里并设置新密码，例如账户是“ycyubuntu”，在root账户下输入命令：smbpasswd -a ycyubuntu</p>
+<pre><code>sudo apt-get install samba  
+vim /etc/samba/smb.conf  
+</code></pre><p> 把已有的账户添加到samba里并设置新密码，例如账户是“ycyubuntu”，在root账户下输入命令：smbpasswd -a ycyubuntu</p>
 </li>
 </ol>
 
@@ -667,11 +678,16 @@ git remote set-url origin ssh://git@yinman:2224/bqin/ysbr2.git
 <h2 id="github-仓库地址"><a href="#github-仓库地址" class="headerlink" title="github 仓库地址"></a>github 仓库地址</h2><p>git@github.com:buaaqbh/buaaqbh.github.io.git</p>
 <h2 id="hexo基本操作"><a href="#hexo基本操作" class="headerlink" title="hexo基本操作"></a>hexo基本操作</h2><ol>
 <li><p>发布新的Blog</p>
-<p> hexo n “我的博客” == hexo new “我的博客” #新建文章<br> hexo g == hexo generate #生成<br> hexo s == hexo server #启动服务预览<br> hexo d == hexo deploy #部署    </p>
-</li>
+<pre><code>hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章  
+hexo g == hexo generate #生成  
+hexo s == hexo server #启动服务预览  
+hexo d == hexo deploy #部署    
+</code></pre></li>
 <li><p>删除Blog</p>
-<p> 在/source/_posts/中直接删除了相应的.md文件<br> hexo clean<br> hexo g -d  </p>
-</li>
+<p> 在/source/_posts/中直接删除了相应的.md文件  </p>
+<pre><code>hexo clean  
+hexo g -d  
+</code></pre></li>
 </ol>
 
           

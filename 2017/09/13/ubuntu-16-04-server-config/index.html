@@ -95,17 +95,17 @@
 
 
 
-<meta name="description" content="参考：https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04  apache2:  sudo apt-get install apache2  Install MySQL  sudo apt-get install mysql-">
+<meta name="description" content="参考：https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04  apache2: sudo apt-get install apache2  Install MySQL sudo apt-get install mysql-se">
 <meta name="keywords" content="教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu 16.04 server config">
 <meta property="og:url" content="https://buaaqbh.github.io/2017/09/13/ubuntu-16-04-server-config/index.html">
 <meta property="og:site_name" content="Bqin&#39;s Blog">
-<meta property="og:description" content="参考：https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04  apache2:  sudo apt-get install apache2  Install MySQL  sudo apt-get install mysql-">
-<meta property="og:updated_time" content="2017-09-13T09:18:15.064Z">
+<meta property="og:description" content="参考：https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04  apache2: sudo apt-get install apache2  Install MySQL sudo apt-get install mysql-se">
+<meta property="og:updated_time" content="2017-09-13T10:14:45.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu 16.04 server config">
-<meta name="twitter:description" content="参考：https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04  apache2:  sudo apt-get install apache2  Install MySQL  sudo apt-get install mysql-">
+<meta name="twitter:description" content="参考：https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04  apache2: sudo apt-get install apache2  Install MySQL sudo apt-get install mysql-se">
 
 
 
@@ -318,29 +318,40 @@
         <p>参考：<a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04" title="参考" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04</a></p>
 <ol>
 <li><p>apache2:</p>
-<p> sudo apt-get install apache2</p>
-</li>
+<pre><code>sudo apt-get install apache2
+</code></pre></li>
 <li><p>Install MySQL</p>
-<p> sudo apt-get install mysql-server</p>
-</li>
+<pre><code>sudo apt-get install mysql-server
+</code></pre></li>
 <li><p>Install PHP</p>
-<p> sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql<br> sudo systemctl restart apache2</p>
-</li>
+<pre><code>sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql  
+sudo systemctl restart apache2
+</code></pre></li>
 <li><p>Installing Webmin</p>
-<p> sudo nano /etc/apt/sources.list<br> Then add this line to the bottom of the file to add the new repository:<br> deb <a href="http://download.webmin.com/download/repository" target="_blank" rel="external">http://download.webmin.com/download/repository</a> sarge contrib  </p>
-<p> wget <a href="http://www.webmin.com/jcameron-key.asc" target="_blank" rel="external">http://www.webmin.com/jcameron-key.asc</a><br> sudo apt-key add jcameron-key.asc<br> sudo apt-get update<br> sudo apt-get install webmin  </p>
-</li>
+<pre><code>sudo nano /etc/apt/sources.list  
+Then add this line to the bottom of the file to add the new repository:  
+deb http://download.webmin.com/download/repository sarge contrib  
+
+wget http://www.webmin.com/jcameron-key.asc  
+sudo apt-key add jcameron-key.asc  
+sudo apt-get update  
+sudo apt-get install webmin  
+</code></pre></li>
 <li><p>jre</p>
-<p> sudo apt install default-jre</p>
-</li>
+<pre><code>sudo apt install default-jre
+</code></pre></li>
 <li><p>32bit</p>
-<p> sudo dpkg –add-architecture i386<br> sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386</p>
-</li>
+<pre><code>sudo dpkg --add-architecture i386  
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+</code></pre></li>
 <li><p>ctags</p>
-<p> sudo apt-get install ctags<br> sudo apt install cscope  </p>
-</li>
+<pre><code>sudo apt-get install ctags  
+sudo apt install cscope  
+</code></pre></li>
 <li><p>samba</p>
-<p> sudo apt-get install samba<br> vim /etc/samba/smb.conf<br> 把已有的账户添加到samba里并设置新密码，例如账户是“ycyubuntu”，在root账户下输入命令：smbpasswd -a ycyubuntu</p>
+<pre><code>sudo apt-get install samba  
+vim /etc/samba/smb.conf  
+</code></pre><p> 把已有的账户添加到samba里并设置新密码，例如账户是“ycyubuntu”，在root账户下输入命令：smbpasswd -a ycyubuntu</p>
 </li>
 </ol>
 
