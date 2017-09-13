@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="教程," />
 
 
 
@@ -95,16 +95,17 @@
 
 
 
-<meta name="description" content="Gitlab Docker Install:  Install Docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ sudo apt-get remove docker docker-engine docker.iosudo apt-get update sudo apt-get install l">
+<meta name="description" content="Gitlab Docker Install:  Install Docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ sudo apt-get remove docker docker-engine docker.io   sudo apt-get update  sudo apt-get insta">
+<meta name="keywords" content="教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Install gitlab on ubuntu16.04 using docker">
 <meta property="og:url" content="https://buaaqbh.github.io/2017/09/13/Install-gitlab-on-ubuntu16-04-using-docker/index.html">
 <meta property="og:site_name" content="Bqin&#39;s Blog">
-<meta property="og:description" content="Gitlab Docker Install:  Install Docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ sudo apt-get remove docker docker-engine docker.iosudo apt-get update sudo apt-get install l">
-<meta property="og:updated_time" content="2017-09-13T09:21:12.968Z">
+<meta property="og:description" content="Gitlab Docker Install:  Install Docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ sudo apt-get remove docker docker-engine docker.io   sudo apt-get update  sudo apt-get insta">
+<meta property="og:updated_time" content="2017-09-13T09:59:31.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Install gitlab on ubuntu16.04 using docker">
-<meta name="twitter:description" content="Gitlab Docker Install:  Install Docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ sudo apt-get remove docker docker-engine docker.iosudo apt-get update sudo apt-get install l">
+<meta name="twitter:description" content="Gitlab Docker Install:  Install Docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/ sudo apt-get remove docker docker-engine docker.io   sudo apt-get update  sudo apt-get insta">
 
 
 
@@ -317,46 +318,82 @@
         <p>Gitlab Docker Install:</p>
 <ol>
 <li><p>Install Docker: <a href="https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/</a></p>
-<p>sudo apt-get remove docker docker-engine docker.io<br>sudo apt-get update</p>
-<p>sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual</p>
-<p>sudo apt-get install apt-transport-https ca-certificates curl software-properties-common</p>
-<p>curl -fsSL <a href="https://download.docker.com/linux/ubuntu/gpg" target="_blank" rel="external">https://download.docker.com/linux/ubuntu/gpg</a> | sudo apt-key add -</p>
-<p>sudo apt-key fingerprint 0EBFCD88</p>
-<p>sudo add-apt-repository “deb [arch=amd64] <a href="https://download.docker.com/linux/ubuntu" target="_blank" rel="external">https://download.docker.com/linux/ubuntu</a> $(lsb_release -cs) stable”</p>
-<p>sudo apt-get update</p>
-<p>sudo apt-get install docker-ce</p>
-</li>
+<pre><code>sudo apt-get remove docker docker-engine docker.io  
+sudo apt-get update
+
+sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual 
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo apt-key fingerprint 0EBFCD88
+
+sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;  
+
+sudo apt-get update
+
+sudo apt-get install docker-ce
+</code></pre></li>
+</ol>
+<ol>
 <li><p>Install Docker Compose: <a href="https://docs.docker.com/compose/install/#install-compose" target="_blank" rel="external">https://docs.docker.com/compose/install/#install-compose</a></p>
-<p>sudo curl -L <a href="https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname" target="_blank" rel="external">https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname</a> -s<code>-</code>uname -m` -o /usr/local/bin/docker-compose</p>
-<p>sudo chmod +x /usr/local/bin/docker-compose</p>
-<p>docker-compose –version</p>
-</li>
+<pre><code>sudo curl -L https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+</code></pre></li>
 <li><p>GitLab Docker images: <a href="http://docs.gitlab.com/omnibus/docker/README.html" target="_blank" rel="external">http://docs.gitlab.com/omnibus/docker/README.html</a></p>
-<p>docker-compose.yml:<br>gitlab:<br> image: ‘gitlab/gitlab-ce:latest’<br> restart: always<br> hostname: ‘yinman’<br> environment:</p>
-<pre><code>GITLAB_OMNIBUS_CONFIG: |
-        external_url &apos;http://yinman:8090&apos;
-        gitlab_rails[&apos;gitlab_shell_ssh_port&apos;] = 2224
-</code></pre><p> ports:</p>
-<pre><code>- &apos;8090:8090&apos;
-- &apos;2224:22&apos;
-</code></pre><p> volumes:</p>
-<pre><code>- &apos;/home/srv/gitlab/config:/etc/gitlab&apos;
-- &apos;/home/srv/gitlab/logs:/var/log/gitlab&apos;
-- &apos;/home/srv/gitlab/data:/var/opt/gitlab&apos;
-</code></pre><p>Start Gitlab:<br>   sudo docker-compose up -d</p>
-</li>
+<p>docker-compose.yml:  </p>
+<pre><code>gitlab:
+    image: &apos;gitlab/gitlab-ce:latest&apos;
+    restart: always
+    hostname: &apos;yinman&apos;
+    environment:
+          GITLAB_OMNIBUS_CONFIG: |
+                  external_url &apos;http://yinman:8090&apos;
+                  gitlab_rails[&apos;gitlab_shell_ssh_port&apos;] = 2224
+    ports:
+          - &apos;8090:8090&apos;
+          - &apos;2224:22&apos;
+    volumes:
+          - &apos;/home/srv/gitlab/config:/etc/gitlab&apos;
+          - &apos;/home/srv/gitlab/logs:/var/log/gitlab&apos;
+          - &apos;/home/srv/gitlab/data:/var/opt/gitlab&apos;
+</code></pre><p>Start Gitlab:</p>
+<pre><code>sudo docker-compose up -d
+</code></pre></li>
 <li><p>Change configure:</p>
-<p>sudo docker exec -it gitlab /bin/bash<br>sudo docker exec -it gitlab vi /etc/gitlab/gitlab.rb<br>sudo docker restart gitlab</p>
-</li>
+<pre><code>sudo docker exec -it gitlab /bin/bash  
+sudo docker exec -it gitlab vi /etc/gitlab/gitlab.rb  
+sudo docker restart gitlab
+</code></pre></li>
 <li><p>SMTP Setting: <a href="https://docs.gitlab.com/omnibus/settings/smtp.html#qq-exmail" target="_blank" rel="external">https://docs.gitlab.com/omnibus/settings/smtp.html#qq-exmail</a></p>
-<p>QQ exmail (腾讯企业邮箱)<br>   gitlab_rails[‘smtp_enable’] = true<br>   gitlab_rails[‘smtp_address’] = “smtp.exmail.qq.com”<br>   gitlab_rails[‘smtp_port’] = 465<br>   gitlab_rails[‘smtp_user_name’] = “xxxx@xx.com”<br>   gitlab_rails[‘smtp_password’] = “password”<br>   gitlab_rails[‘smtp_authentication’] = “login”<br>   gitlab_rails[‘smtp_enable_starttls_auto’] = true<br>   gitlab_rails[‘smtp_tls’] = true<br>   gitlab_rails[‘gitlab_email_from’] = ‘xxxx@xx.com’</p>
-</li>
+<p>QQ exmail (腾讯企业邮箱) </p>
+<pre><code>gitlab_rails[&apos;smtp_enable&apos;] = true
+gitlab_rails[&apos;smtp_address&apos;] = &quot;smtp.exmail.qq.com&quot;
+gitlab_rails[&apos;smtp_port&apos;] = 465
+gitlab_rails[&apos;smtp_user_name&apos;] = &quot;xxxx@xx.com&quot;
+gitlab_rails[&apos;smtp_password&apos;] = &quot;password&quot;
+gitlab_rails[&apos;smtp_authentication&apos;] = &quot;login&quot;
+gitlab_rails[&apos;smtp_enable_starttls_auto&apos;] = true
+gitlab_rails[&apos;smtp_tls&apos;] = true
+gitlab_rails[&apos;gitlab_email_from&apos;] = &apos;xxxx@xx.com&apos;
+</code></pre></li>
 <li><p>import gitlab repository data</p>
-<p>cp linux-3.3-OMAP-L138.git /home/srv/gitlab/data/git-data/repositories/bqin/<br>rm linux-3.3-OMAP-L138.git/hooks<br>find ./ -name hooks | xargs rm<br>chown git:git -R *<br>gitlab-rake gitlab:import:repos</p>
-<p>git remote set-url origin ssh://git@yinman:2224/bqin/ysbr2.git</p>
-</li>
-<li><p>无需使用 sudo 执行 docker 命令<br>sudo usermod -aG docker $(whoami)<br>之后重新登录，再运行 $ docker run hello-world 进行测试</p>
-<p>docker run -it ubuntu<br>该命令启动了一个 ubuntu 容器，然后通过 -i 开关指定在容器中开启一个可交互的 shell</p>
+<pre><code>cp linux-3.3-OMAP-L138.git /home/srv/gitlab/data/git-data/repositories/bqin/
+rm linux-3.3-OMAP-L138.git/hooks
+find ./ -name hooks | xargs rm
+chown git:git -R *
+gitlab-rake gitlab:import:repos
+
+git remote set-url origin ssh://git@yinman:2224/bqin/ysbr2.git
+</code></pre></li>
+<li><p>无需使用 sudo 执行 docker 命令</p>
+<pre><code>sudo usermod -aG docker $(whoami)
+</code></pre><p>之后重新登录，再运行 $ docker run hello-world 进行测试</p>
+<pre><code>docker run -it ubuntu
+</code></pre><p>该命令启动了一个 ubuntu 容器，然后通过 -i 开关指定在容器中开启一个可交互的 shell</p>
 <p>​</p>
 </li>
 </ol>
@@ -374,6 +411,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教程/" rel="tag"># 教程</a>
+          
+        </div>
       
 
       
