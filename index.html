@@ -346,7 +346,8 @@
       
         
           
-            <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于特殊的网络原因，网络偶尔抽风就会导致我们在做apt-update时候出现Hash Sum mismatch的问题，尤其是在使用docker Debian：jessie的时候。</p>
+            <p>原文：<a href="http://ju.outofmemory.cn/entry/276978" target="_blank" rel="external">http://ju.outofmemory.cn/entry/276978</a></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于特殊的网络原因，网络偶尔抽风就会导致我们在做apt-update时候出现Hash Sum mismatch的问题，尤其是在使用docker Debian：jessie的时候。</p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>我们所使用的网络供应商，有些会设置一些透明缓存，以增加网络内部速度，减少出口的流量，你获取的某些文件不是源服务器上的真正文件，是从缓存中获取的，当缓存中获取的一些校验信息跟源中不一致的时候，自然提示校验失败，无法继续更新。<br>此问题实际上跟apt软件仓库的格式设计有关。新发布的版本的软件仓库更新比较频繁，按道理缓存中的文件应该同步更新，可惜因为多个镜像站点的有快慢，因此造成了缓存无法保证一致性。<br>当网络提供商足够有实力，不设至透明缓存时，这个问题是不存在的。这就是为什么有些人反馈使用无线上网卡（移动、联通的3g网络）就一切OK，一单换回长城宽带、或者宽带通就不行了。<br>以上就是问题出现的真正原因。 </p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>解决方案很简单，绕过缓存直接访问站点即可。<br>值得称赞的是国内好几家良心企业提供了更新源，其中速度最好的应该是阿里提供的 <a href="http://mirrors.aliyun.com/" target="_blank" rel="external">http://mirrors.aliyun.com/</a><br>以debian为例， 访问 <a href="http://mirrors.aliyun.com/help/debian" target="_blank" rel="external">http://mirrors.aliyun.com/help/debian</a> 可以看到修改方法。<br>具体到Docker中， 我们需要修改Docker file，添加如下代码：</p>
 <pre><code>RUN echo &apos;deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib\n\
