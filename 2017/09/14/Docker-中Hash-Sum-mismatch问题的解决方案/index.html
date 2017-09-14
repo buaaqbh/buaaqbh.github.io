@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="教程," />
 
 
 
@@ -95,13 +95,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bqin&#39;s Blog">
-<meta property="og:url" content="https://buaaqbh.github.io/categories/教程/index.html">
+<meta name="description" content="问题由于特殊的网络原因，网络偶尔抽风就会导致我们在做apt-update时候出现Hash Sum mismatch的问题，尤其是在使用docker Debian：jessie的时候。 原因我们所使用的网络供应商，有些会设置一些透明缓存，以增加网络内部速度，减少出口的流量，你获取的某些文件不是源服务器上的真正文件，是从缓存中获取的，当缓存中获取的一些校验信息跟源中不一致的时候，自然提示校验失败，无法">
+<meta name="keywords" content="教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 中Hash Sum mismatch问题的解决方案">
+<meta property="og:url" content="https://buaaqbh.github.io/2017/09/14/Docker-中Hash-Sum-mismatch问题的解决方案/index.html">
 <meta property="og:site_name" content="Bqin&#39;s Blog">
+<meta property="og:description" content="问题由于特殊的网络原因，网络偶尔抽风就会导致我们在做apt-update时候出现Hash Sum mismatch的问题，尤其是在使用docker Debian：jessie的时候。 原因我们所使用的网络供应商，有些会设置一些透明缓存，以增加网络内部速度，减少出口的流量，你获取的某些文件不是源服务器上的真正文件，是从缓存中获取的，当缓存中获取的一些校验信息跟源中不一致的时候，自然提示校验失败，无法">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-14T01:35:48.289Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bqin&#39;s Blog">
+<meta name="twitter:title" content="Docker 中Hash Sum mismatch问题的解决方案">
+<meta name="twitter:description" content="问题由于特殊的网络原因，网络偶尔抽风就会导致我们在做apt-update时候出现Hash Sum mismatch的问题，尤其是在使用docker Debian：jessie的时候。 原因我们所使用的网络供应商，有些会设置一些透明缓存，以增加网络内部速度，减少出口的流量，你获取的某些文件不是源服务器上的真正文件，是从缓存中获取的，当缓存中获取的一些校验信息跟源中不一致的时候，自然提示校验失败，无法">
 
 
 
@@ -131,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://buaaqbh.github.io/categories/教程/"/>
+  <link rel="canonical" href="https://buaaqbh.github.io/2017/09/14/Docker-中Hash-Sum-mismatch问题的解决方案/"/>
 
 
 
 
 
-  <title>分类: 教程 | Bqin's Blog</title>
+  <title>Docker 中Hash Sum mismatch问题的解决方案 | Bqin's Blog</title>
   
 
 
@@ -156,7 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -260,55 +265,153 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>教程<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://buaaqbh.github.io/2017/09/14/Docker-中Hash-Sum-mismatch问题的解决方案/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bqin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/09/13/GitHub-Hexo-搭建个人网站详细教程/" itemprop="url">
-              
-                <span itemprop="name">GitHub+Hexo 搭建个人网站详细教程</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Docker 中Hash Sum mismatch问题的解决方案</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-09-13T13:32:25+08:00"
-              content="2017-09-13" >
-          09-13
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-14T09:29:03+08:00">
+                2017-09-14
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
+      
 
+      
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于特殊的网络原因，网络偶尔抽风就会导致我们在做apt-update时候出现Hash Sum mismatch的问题，尤其是在使用docker Debian：jessie的时候。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>我们所使用的网络供应商，有些会设置一些透明缓存，以增加网络内部速度，减少出口的流量，你获取的某些文件不是源服务器上的真正文件，是从缓存中获取的，当缓存中获取的一些校验信息跟源中不一致的时候，自然提示校验失败，无法继续更新。<br>此问题实际上跟apt软件仓库的格式设计有关。新发布的版本的软件仓库更新比较频繁，按道理缓存中的文件应该同步更新，可惜因为多个镜像站点的有快慢，因此造成了缓存无法保证一致性。<br>当网络提供商足够有实力，不设至透明缓存时，这个问题是不存在的。这就是为什么有些人反馈使用无线上网卡（移动、联通的3g网络）就一切OK，一单换回长城宽带、或者宽带通就不行了。<br>以上就是问题出现的真正原因。 </p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>解决方案很简单，绕过缓存直接访问站点即可。<br>值得称赞的是国内好几家良心企业提供了更新源，其中速度最好的应该是阿里提供的 <a href="http://mirrors.aliyun.com/" target="_blank" rel="external">http://mirrors.aliyun.com/</a><br>以debian为例， 访问 <a href="http://mirrors.aliyun.com/help/debian" target="_blank" rel="external">http://mirrors.aliyun.com/help/debian</a> 可以看到修改方法。<br>具体到Docker中， 我们需要修改Docker file，添加如下代码：</p>
+<pre><code>RUN echo &apos;deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib\n\
+deb http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib\n\
+deb-src http://mirrors.aliyun.com/debian/ jessie main non-free contrib\n\
+deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib&apos;  &gt; /etc/apt/sources.list
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/教程/" rel="tag"># 教程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/13/Install-gitlab-on-ubuntu16-04-using-docker/" rel="next" title="Install gitlab on ubuntu16.04 using docker">
+                <i class="fa fa-chevron-left"></i> Install gitlab on ubuntu16.04 using docker
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -316,6 +419,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -336,8 +443,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -402,6 +518,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -522,6 +654,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
 
   
 
