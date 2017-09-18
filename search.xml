@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Scrum with Trello]]></title>
+      <url>/2017/09/14/Scrum-with-Trello/</url>
+      <content type="html"><![CDATA[<p>原文：<a href="https://www.infoq.com/articles/scrum-trello" title="Scrum with Trello" target="_blank" rel="external">https://www.infoq.com/articles/scrum-trello</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> scrum </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Docker 中Hash Sum mismatch问题的解决方案]]></title>
+      <url>/2017/09/14/Docker-%E4%B8%ADHash-Sum-mismatch%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+      <content type="html"><![CDATA[<p>原文：<a href="http://ju.outofmemory.cn/entry/276978" target="_blank" rel="external">http://ju.outofmemory.cn/entry/276978</a></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于特殊的网络原因，网络偶尔抽风就会导致我们在做apt-update时候出现Hash Sum mismatch的问题，尤其是在使用docker Debian：jessie的时候。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>我们所使用的网络供应商，有些会设置一些透明缓存，以增加网络内部速度，减少出口的流量，你获取的某些文件不是源服务器上的真正文件，是从缓存中获取的，当缓存中获取的一些校验信息跟源中不一致的时候，自然提示校验失败，无法继续更新。<br>此问题实际上跟apt软件仓库的格式设计有关。新发布的版本的软件仓库更新比较频繁，按道理缓存中的文件应该同步更新，可惜因为多个镜像站点的有快慢，因此造成了缓存无法保证一致性。<br>当网络提供商足够有实力，不设至透明缓存时，这个问题是不存在的。这就是为什么有些人反馈使用无线上网卡（移动、联通的3g网络）就一切OK，一单换回长城宽带、或者宽带通就不行了。<br>以上就是问题出现的真正原因。 </p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>解决方案很简单，绕过缓存直接访问站点即可。<br>值得称赞的是国内好几家良心企业提供了更新源，其中速度最好的应该是阿里提供的 <a href="http://mirrors.aliyun.com/" target="_blank" rel="external">http://mirrors.aliyun.com/</a><br>以debian为例， 访问 <a href="http://mirrors.aliyun.com/help/debian" target="_blank" rel="external">http://mirrors.aliyun.com/help/debian</a> 可以看到修改方法。<br>具体到Docker中， 我们需要修改Docker file，添加如下代码：</p>
+<pre><code>RUN echo &apos;deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib\n\
+deb http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib\n\
+deb-src http://mirrors.aliyun.com/debian/ jessie main non-free contrib\n\
+deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib&apos;  &gt; /etc/apt/sources.list
+</code></pre>]]></content>
+      
+        
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Install gitlab on ubuntu16.04 using docker]]></title>
+      <url>/2017/09/13/Install-gitlab-on-ubuntu16-04-using-docker/</url>
+      <content type="html"><![CDATA[<p>Gitlab Docker Install:</p>
+<ol>
+<li><p>Install Docker: <a href="https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/</a></p>
+<pre><code>sudo apt-get remove docker docker-engine docker.io  
+sudo apt-get update
+
+sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual 
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo apt-key fingerprint 0EBFCD88
+
+sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;  
+
+sudo apt-get update
+
+sudo apt-get install docker-ce
+</code></pre></li>
+</ol>
+<ol>
+<li><p>Install Docker Compose: <a href="https://docs.docker.com/compose/install/#install-compose" target="_blank" rel="external">https://docs.docker.com/compose/install/#install-compose</a></p>
+<pre><code>sudo curl -L https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+</code></pre></li>
+<li><p>GitLab Docker images: <a href="http://docs.gitlab.com/omnibus/docker/README.html" target="_blank" rel="external">http://docs.gitlab.com/omnibus/docker/README.html</a></p>
+<p>docker-compose.yml:  </p>
+<pre><code>gitlab:
+    image: &apos;gitlab/gitlab-ce:latest&apos;
+    restart: always
+    hostname: &apos;yinman&apos;
+    environment:
+          GITLAB_OMNIBUS_CONFIG: |
+                  external_url &apos;http://yinman:8090&apos;
+                  gitlab_rails[&apos;gitlab_shell_ssh_port&apos;] = 2224
+    ports:
+          - &apos;8090:8090&apos;
+          - &apos;2224:22&apos;
+    volumes:
+          - &apos;/home/srv/gitlab/config:/etc/gitlab&apos;
+          - &apos;/home/srv/gitlab/logs:/var/log/gitlab&apos;
+          - &apos;/home/srv/gitlab/data:/var/opt/gitlab&apos;
+</code></pre><p>Start Gitlab:</p>
+<pre><code>sudo docker-compose up -d
+</code></pre></li>
+<li><p>Change configure:</p>
+<pre><code>sudo docker exec -it gitlab /bin/bash  
+sudo docker exec -it gitlab vi /etc/gitlab/gitlab.rb  
+sudo docker restart gitlab
+</code></pre></li>
+<li><p>SMTP Setting: <a href="https://docs.gitlab.com/omnibus/settings/smtp.html#qq-exmail" target="_blank" rel="external">https://docs.gitlab.com/omnibus/settings/smtp.html#qq-exmail</a></p>
+<p>QQ exmail (腾讯企业邮箱) </p>
+<pre><code>gitlab_rails[&apos;smtp_enable&apos;] = true
+gitlab_rails[&apos;smtp_address&apos;] = &quot;smtp.exmail.qq.com&quot;
+gitlab_rails[&apos;smtp_port&apos;] = 465
+gitlab_rails[&apos;smtp_user_name&apos;] = &quot;xxxx@xx.com&quot;
+gitlab_rails[&apos;smtp_password&apos;] = &quot;password&quot;
+gitlab_rails[&apos;smtp_authentication&apos;] = &quot;login&quot;
+gitlab_rails[&apos;smtp_enable_starttls_auto&apos;] = true
+gitlab_rails[&apos;smtp_tls&apos;] = true
+gitlab_rails[&apos;gitlab_email_from&apos;] = &apos;xxxx@xx.com&apos;
+</code></pre></li>
+<li><p>import gitlab repository data</p>
+<pre><code>cp linux-3.3-OMAP-L138.git /home/srv/gitlab/data/git-data/repositories/bqin/
+rm linux-3.3-OMAP-L138.git/hooks
+find ./ -name hooks | xargs rm
+chown git:git -R *
+gitlab-rake gitlab:import:repos
+
+git remote set-url origin ssh://git@yinman:2224/bqin/ysbr2.git
+</code></pre></li>
+<li><p>无需使用 sudo 执行 docker 命令</p>
+<pre><code>sudo usermod -aG docker $(whoami)
+</code></pre><p>之后重新登录，再运行 $ docker run hello-world 进行测试</p>
+<pre><code>docker run -it ubuntu
+</code></pre><p>该命令启动了一个 ubuntu 容器，然后通过 -i 开关指定在容器中开启一个可交互的 shell</p>
+<p>​</p>
+</li>
+</ol>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ubuntu 16.04 server config]]></title>
+      <url>/2017/09/13/ubuntu-16-04-server-config/</url>
+      <content type="html"><![CDATA[<p>参考：<a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04" title="参考" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04</a></p>
+<ol>
+<li><p>apache2:</p>
+<pre><code>sudo apt-get install apache2
+</code></pre></li>
+<li><p>Install MySQL</p>
+<pre><code>sudo apt-get install mysql-server
+</code></pre></li>
+<li><p>Install PHP</p>
+<pre><code>sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql  
+sudo systemctl restart apache2
+</code></pre></li>
+<li><p>Installing Webmin</p>
+<pre><code>sudo nano /etc/apt/sources.list  
+Then add this line to the bottom of the file to add the new repository:  
+deb http://download.webmin.com/download/repository sarge contrib  
+
+wget http://www.webmin.com/jcameron-key.asc  
+sudo apt-key add jcameron-key.asc  
+sudo apt-get update  
+sudo apt-get install webmin  
+</code></pre></li>
+<li><p>jre</p>
+<pre><code>sudo apt install default-jre
+</code></pre></li>
+<li><p>32bit</p>
+<pre><code>sudo dpkg --add-architecture i386  
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+</code></pre></li>
+<li><p>ctags</p>
+<pre><code>sudo apt-get install ctags  
+sudo apt install cscope  
+</code></pre></li>
+<li><p>samba</p>
+<pre><code>sudo apt-get install samba  
+vim /etc/samba/smb.conf  
+</code></pre><p> 把已有的账户添加到samba里并设置新密码，例如账户是“ycyubuntu”，在root账户下输入命令：smbpasswd -a ycyubuntu</p>
+</li>
+</ol>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[GitHub+Hexo 搭建个人网站详细教程]]></title>
+      <url>/2017/09/13/GitHub-Hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<p>原文：<a href="https://zhuanlan.zhihu.com/p/26625249" title="GitHub+Hexo 搭建个人网站详细教程" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/26625249</a></p>
+<h2 id="github-仓库地址"><a href="#github-仓库地址" class="headerlink" title="github 仓库地址"></a>github 仓库地址</h2><p>git@github.com:buaaqbh/buaaqbh.github.io.git</p>
+<h2 id="hexo基本操作"><a href="#hexo基本操作" class="headerlink" title="hexo基本操作"></a>hexo基本操作</h2><ol>
+<li><p>发布新的Blog</p>
+<pre><code>hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章  
+hexo g == hexo generate #生成  
+hexo s == hexo server #启动服务预览  
+hexo d == hexo deploy #部署    
+</code></pre></li>
+<li><p>删除Blog</p>
+<p> 在/source/_posts/中直接删除了相应的.md文件  </p>
+<pre><code>hexo clean  
+hexo g -d  
+</code></pre></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> 教程 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
